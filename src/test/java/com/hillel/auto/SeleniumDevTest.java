@@ -13,43 +13,80 @@ import static org.testng.Assert.assertEquals;
 
 public class SeleniumDevTest {
     public WebDriver driver;
+    public String title;
 
     @BeforeClass
     public void setUpDriver (){
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
     public void setUp () {
         driver = new ChromeDriver();
         WebDriver.Window window = driver.manage().window();
-        window.fullscreen();
+//        window.fullscreen();
     }
 
     @AfterMethod
     public void quot () {
         driver.quit();
     }
+
     @Test
     public void seleniumDevSiteShouldBeOpen () {
 
         driver.get("https://www.selenium.dev/");
-        String title = driver.getTitle();//SeleniumHQ Browser Automation
+        title = driver.getTitle();//SeleniumHQ Browser Automation
         System.out.println(title);
         assertEquals(title, "SeleniumHQ Browser Automation");
     }
-        @Test
+
+    @Test
+    public void seleniumDownloadsShouldBeOpen (){
+        driver.get("https://www.selenium.dev/downloads/");
+        String title = driver.getTitle();
+        System.out.println(title);
+        assertThat(title).
+                isEqualTo("Downloads");
+    }
+    @Test
         public void seleniumProjectShouldBeOpen (){
             WebDriver.Navigation navigate = driver.navigate();
-
             navigate.to("https://www.selenium.dev/projects");
             navigate.back();
             navigate.forward();
             navigate.refresh();
-            String title = driver.getTitle();
+            title = driver.getTitle();
             System.out.println(title);
 //            assertEquals(title, "Selenium Projects");
             assertThat(title).
                     isEqualTo("Selenium Projects");
         }
 
+    @Test
+    public void seleniumDocumentationShouldBeOpen (){
+        driver.get("https://www.selenium.dev/documentation/");
+        title = driver.getTitle();
+        System.out.println(title);
+        assertThat(title).
+                isEqualTo("The Selenium Browser Automation Project :: Documentation for Selenium");
+    }
+
+    @Test
+    public void seleniumSupportShouldBeOpen (){
+        driver.get("https://www.selenium.dev/support/");
+        title = driver.getTitle();
+        System.out.println(title);
+        assertThat(title).
+                isEqualTo("Selenium Support");
+    }
+
+    @Test
+    public void seleniumBlogShouldBeOpen (){
+        driver.get("https://www.selenium.dev/blog/");
+        title = driver.getTitle();
+        System.out.println(title);
+        assertThat(title).
+                isEqualTo("Selenium Blog");
+    }
 }
