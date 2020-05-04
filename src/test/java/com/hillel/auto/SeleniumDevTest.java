@@ -36,6 +36,7 @@ public class SeleniumDevTest {
     public void seleniumDevSiteShouldBeOpen () {
 
         driver.get("https://www.selenium.dev/");
+
         title = driver.getTitle();//SeleniumHQ Browser Automation
         System.out.println(title);
         assertEquals(title, "SeleniumHQ Browser Automation");
