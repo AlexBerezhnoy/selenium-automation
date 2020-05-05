@@ -37,8 +37,8 @@ public class LoginTest {
     public void loginTest () {
 
          driver.get("https://react-redux.realworld.io");
-         WebElement signUpButton = driver.findElement(By.cssSelector("a[href = '#login']"));
-         signUpButton.click();
+         WebElement signIpButton = driver.findElement(By.cssSelector("a[href = '#login']"));
+         signIpButton.click();
          WebElement signInForm = driver.findElement(By.cssSelector(".auth-page form"));
          assertThat(signInForm.isDisplayed()).isTrue();
          String user = "UserAleks1";
