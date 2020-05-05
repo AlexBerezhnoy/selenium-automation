@@ -28,7 +28,7 @@ public class SeleniumDevTest {
     }
 
     @AfterMethod
-    public void quot () {
+    public void quit () {
         driver.quit();
     }
 
