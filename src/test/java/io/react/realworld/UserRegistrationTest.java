@@ -1,83 +1,72 @@
 package io.react.realworld;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.hillel.auto.User;
+import com.hillel.auto.utils.UserData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UserRegistrationTest {
-        public WebDriver driver;
+public class UserRegistrationTest extends TestBase {
 
-        @BeforeClass
-        public void setUpDriver() {
-            WebDriverManager.chromedriver().setup();
-        }
 
-        @BeforeMethod
-        public void setUp() {
-            driver = new ChromeDriver();
-            driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
-        }
+    @Test
+    public void registrationTest() {
 
-        @AfterMethod
-        public void quot() {
-            driver.quit();
-        }
-
-       @Test
-            public void registrationTest() {
-           driver.get("https://react-redux.realworld.io");
 //            WebElement signUpButton = driver.findElement(By.cssSelector("#main > div > nav > div > ul > li:nth-child(3) > a"));
 //            WebElement signUpButton = driver.findElement(By.linkText("Sign up"));
-           WebElement signUpButton = driver.findElement(By.cssSelector("a[href = '#register']"));
-           signUpButton.click();
+
 //            String currentURL = driver.getCurrentUrl();
 //            assertThat(currentURL).contains("register");
-           WebElement signUpHeader = driver.findElement(By.cssSelector(".auth-page h1"));
-           assertThat(signUpHeader.getText()).isEqualTo("Sign Up");
+        clickRegistrationButton();
 
-           WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-           assertThat(signUpForm.isDisplayed()).isTrue();
+        checkPage("Sign Up");
+        assertThat(singForm().isDisplayed()).isTrue();
+        User user = UserData.randomUser();
 
-           String user = "TestUser"+new Random().nextInt(10000);
-           String email = user+"@rambler.ru";
-           String password = "qwerty123";
+        inputText(userNameFiled(), user.getUserName());
+        inputText(emailField(), user.getEmail());
+        inputText(passwordField(), user.getPassword());
 
-           WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-           userNameField.clear();
-           userNameField.sendKeys(user);
+        clickSingInButton();
 
-           WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-           emailField.clear();
-           emailField.sendKeys(email);
+        userShouldBeLoggedIn(user.getUserName());
 
-           WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-           passwordField.clear();
-           passwordField.sendKeys(password);
+    }
 
-           WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-           signInButton.click();
+    @Test
+    public void validationRegistrationForm() {
+        clickRegistrationButton();
 
-           WebElement userInfo = driver.findElement(By.cssSelector("[href='#@"+user+"']"));
-           assertThat(userInfo.isDisplayed()).isTrue();
+       checkPage("Sign Up");
 
-       }
+        clickSingInButton();
 
-//       @Test
-//    public void loginTest () {
-//            String user = "TestUser";
-//            String email = "UserTest@rambler.ru";
-//           String password = "qwerty123";
-//       }
+        List<WebElement> errorMessage = driver.findElements(By.cssSelector(".error-messages>li"));
 
-}
+//           assertThat(errorMessage).hasSize(3);
+//           assertThat(errorMessage.get(0).getText()).isEqualTo("email can't be blank");
+//           List<String> errors = new ArrayList<>();
+//           for (WebElement error: errorMessage) {
+//               errors.add(error.getText());
+//           }
+        List<String> errors = errorMessage.stream().map(WebElement::getText).collect(Collectors.toList());
+        assertThat(errorMessage).hasSize(3);
+        assertThat(errors).contains("email can't be blank");
+    }
+
+
+        private void clickRegistrationButton() {
+        WebElement signUpButton = driver.findElement(By.cssSelector("a[href='#register']"));
+        signUpButton.click();
+    }
+
+    private WebElement userNameFiled() {
+        return singForm().findElement(By.cssSelector("input[type='text']"));
+    }
+
+   }

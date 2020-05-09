@@ -1,5 +1,7 @@
 package io.react.realworld;
 
+import com.hillel.auto.User;
+import com.hillel.auto.utils.UserData;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,11 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginUserNavigationTest {
+public class LoginUserNavigationTest extends TestBase {
     public WebDriver driver;
-    String user = "UserAleks1";
-    String email = "useraleks1@gmail.com";
-    String password = "qwerty123";
+    private User user = UserData.defaultUser();
 
 
     @BeforeClass
@@ -31,10 +31,10 @@ public class LoginUserNavigationTest {
 
         WebElement emailField = signInForm.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
-        emailField.sendKeys(email);
+        emailField.sendKeys(user.getEmail());
         WebElement passwordField = signInForm.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
-        passwordField.sendKeys(password);
+        passwordField.sendKeys(user.getPassword());
         WebElement signInButton = signInForm.findElement(By.cssSelector("button[type='submit']"));
         signInButton.click();
     }
@@ -71,7 +71,7 @@ public class LoginUserNavigationTest {
     }
     @Test
     public void UserPageTest () {
-        WebElement userButton = driver.findElement(By.cssSelector("a[href = '#@"+user+"']"));
+        WebElement userButton = driver.findElement(By.cssSelector("a[href = '#@"+user.getUserName()+"']"));
         userButton.click();
         WebElement userPage = driver.findElement(By.cssSelector(".user-info"));
         assertThat(userPage.isDisplayed()).isTrue();
