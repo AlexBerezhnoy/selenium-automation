@@ -77,27 +77,6 @@ public class NewPostTest extends TestBase {
 
     }
 
-
-    public void clickMyArticles() {
-        WebElement myPost = driver.findElement(By.cssSelector("#main > div > div > div.container > div > div > div.articles-toggle > ul > li:nth-child(1) > a"));
-        myPost.click();
-    }
-
-    public void clickLastPost () {
-        WebElement lastPost = driver.findElement(By.cssSelector("#main > div > div > div.container > div > div > div:nth-child(2) > div > a"));
-        lastPost.click();
-    }
-
-    public void clickEditButton () {
-        WebElement editButton = driver.findElement(By.cssSelector("#main > div > div > div.banner > div > div > span > a"));
-        editButton.click();
-    }
-
-    public void clickDeleteButton () {
-        WebElement deleteButton = driver.findElement(By.cssSelector("#main > div > div > div.banner > div > div > span > button"));
-        deleteButton.click();
-    }
-
     public WebElement getDatePost () {
         return driver.findElement(By.cssSelector("#main > div > div > div.banner > div > div > div > span"));
     }
