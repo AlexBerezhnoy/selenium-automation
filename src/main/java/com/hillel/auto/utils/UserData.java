@@ -1,9 +1,7 @@
 package com.hillel.auto.utils;
 
 import com.github.javafaker.Faker;
-import com.hillel.auto.User;
-
-import java.util.Random;
+import com.hillel.auto.model.User;
 
 /**
  * Created by alpa on 5/7/20

@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestBase {
+
     protected WebDriver driver;
 
     @BeforeClass
@@ -24,19 +25,21 @@ public class TestBase {
     @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(5000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
         driver.get("https://react-redux.realworld.io/");
     }
 
     @AfterMethod
-    public void quot() {
+    public void tearDown() {
         driver.quit();
     }
 
-    protected void checkPage (String pageHeader) {
+
+    protected void checkPage(String pageHeader) {
         WebElement singUpHeader = driver.findElement(By.cssSelector(".auth-page h1"));
         assertThat(singUpHeader.getText()).isEqualTo(pageHeader);
     }
+
     protected WebElement singForm() {
         return driver.findElement(By.cssSelector(".auth-page form"));
     }
@@ -64,10 +67,9 @@ public class TestBase {
         assertThat(userInfo.isDisplayed()).isTrue();
     }
 
-    protected void clickLoginButton (){
-
-        WebElement signIpButton = driver.findElement(By.cssSelector("a[href = '#login']"));
-        signIpButton.click();
+    protected void clickLoginButton() {
+        WebElement signUpButton = driver.findElement(By.cssSelector("a[href='#login']"));
+        signUpButton.click();
     }
 
     protected void clickUserButton (String userName){

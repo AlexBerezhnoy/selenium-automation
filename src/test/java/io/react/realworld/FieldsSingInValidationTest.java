@@ -1,5 +1,7 @@
 package io.react.realworld;
 
+import com.hillel.auto.page.object.LoginPage;
+import com.hillel.auto.page.object.RegistrationPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,19 +45,10 @@ public class FieldsSingInValidationTest {
 
     @Test
     public void emailBlankValidationTest () {
-
-        WebElement signIpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement emailField = signIpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(" ");
-
-        WebElement passwordField = signIpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = signIpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.inputEmail(" ");
+        loginPage.inputPassword(password);
+        loginPage.clickSingInButton();
 
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email or password is invalid");
@@ -64,19 +57,10 @@ public class FieldsSingInValidationTest {
     @Test
     public void emailWrongValidationTest () {
 
-        WebElement signIpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement emailField = signIpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(" "+email);
-
-        WebElement passwordField = signIpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = signIpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
-
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.inputEmail(" "+email);
+        loginPage.inputPassword(password);
+        loginPage.clickSingInButton();
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email or password is invalid");
 
@@ -84,19 +68,10 @@ public class FieldsSingInValidationTest {
 
     @Test
     public void passwordWrongValidationTest () {
-
-        WebElement signIpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement emailField = signIpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = signIpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(" "+password);
-
-        WebElement signInButton = signIpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.inputEmail(email);
+        loginPage.inputPassword(" "+password);
+        loginPage.clickSingInButton();
 
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email or password is invalid");
@@ -105,18 +80,10 @@ public class FieldsSingInValidationTest {
     @Test
     public void passwordBlankValidationTest () {
 
-        WebElement signIpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement emailField = signIpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = signIpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(" ");
-
-        WebElement signInButton = signIpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.inputEmail(email);
+        loginPage.inputPassword(" ");
+        loginPage.clickSingInButton();
 
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email or password is invalid");

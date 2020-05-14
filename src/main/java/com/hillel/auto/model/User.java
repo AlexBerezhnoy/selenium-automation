@@ -1,4 +1,4 @@
-package com.hillel.auto;
+package com.hillel.auto.model;
 
 import java.util.Random;
 

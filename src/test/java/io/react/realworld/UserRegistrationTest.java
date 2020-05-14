@@ -1,6 +1,6 @@
 package io.react.realworld;
 
-import com.hillel.auto.User;
+import com.hillel.auto.model.User;
 import com.hillel.auto.utils.UserData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,11 +17,6 @@ public class UserRegistrationTest extends TestBase {
     @Test
     public void registrationTest() {
 
-//            WebElement signUpButton = driver.findElement(By.cssSelector("#main > div > nav > div > ul > li:nth-child(3) > a"));
-//            WebElement signUpButton = driver.findElement(By.linkText("Sign up"));
-
-//            String currentURL = driver.getCurrentUrl();
-//            assertThat(currentURL).contains("register");
         clickRegistrationButton();
 
         checkPage("Sign Up");
@@ -48,12 +43,6 @@ public class UserRegistrationTest extends TestBase {
 
         List<WebElement> errorMessage = driver.findElements(By.cssSelector(".error-messages>li"));
 
-//           assertThat(errorMessage).hasSize(3);
-//           assertThat(errorMessage.get(0).getText()).isEqualTo("email can't be blank");
-//           List<String> errors = new ArrayList<>();
-//           for (WebElement error: errorMessage) {
-//               errors.add(error.getText());
-//           }
         List<String> errors = errorMessage.stream().map(WebElement::getText).collect(Collectors.toList());
         assertThat(errorMessage).hasSize(3);
         assertThat(errors).contains("email can't be blank");

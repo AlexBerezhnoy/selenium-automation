@@ -1,5 +1,6 @@
 package io.react.realworld;
 
+import com.hillel.auto.page.object.RegistrationPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -43,71 +44,34 @@ public class FieldsSingUpValidationTest {
 
     @Test
     public void userNameBlankValidationTest () {
-        WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-        userNameField.clear();
-        userNameField.sendKeys(" ");
-
-        WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.inputUser(" ");
+        registrationPage.inputEmail(email);
+        registrationPage.inputPassword(password);
+        registrationPage.clickSingInButton();
 
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("username can't be blank");
+        assertThat(errorText.getText()).isEqualTo("username can't be blankis too short (minimum is 1 character)is too long (maximum is 20 characters)");
     }
 
     @Test
     public void emailBlankValidationTest () {
-
-        WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-        userNameField.clear();
-        userNameField.sendKeys(user);
-
-        WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(" ");
-
-        WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
-
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.inputUser(user);
+        registrationPage.inputEmail(" ");
+        registrationPage.inputPassword(password);
+        registrationPage.clickSingInButton();
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email can't be blank");
 
     }
     @Test
     public void emailValidationTest () {
-
-        WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-        userNameField.clear();
-        userNameField.sendKeys(user);
-
-        WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys("wqweq@v");
-
-        WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-
-        WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
-
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.inputUser(user);
+        registrationPage.inputEmail("wqweq@v");
+        registrationPage.inputPassword(password);
+        registrationPage.clickSingInButton();
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("email is invalid");
 
@@ -115,48 +79,22 @@ public class FieldsSingUpValidationTest {
 
     @Test
     public void passwordShortValidationTest () {
-
-        WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-        userNameField.clear();
-        userNameField.sendKeys(user);
-
-        WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("1");
-
-        WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
-
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.inputUser(user);
+        registrationPage.inputEmail(email);
+        registrationPage.inputPassword("1");
+        registrationPage.clickSingInButton();
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("password is too short (minimum is 8 characters)");
 
     }
     @Test
     public void passwordBlankValidationTest () {
-
-        WebElement signUpForm = driver.findElement(By.cssSelector(".auth-page form"));
-
-        WebElement userNameField = signUpForm.findElement(By.cssSelector("input[type='text']"));
-        userNameField.clear();
-        userNameField.sendKeys(user);
-
-        WebElement emailField = signUpForm.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-
-        WebElement passwordField = signUpForm.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys(" ");
-
-        WebElement signInButton = signUpForm.findElement(By.cssSelector("button[type='submit']"));
-        signInButton.click();
-
+        RegistrationPage registrationPage = new RegistrationPage(driver);
+        registrationPage.inputUser(user);
+        registrationPage.inputEmail(email);
+        registrationPage.inputPassword(" ");
+        registrationPage.clickSingInButton();
         WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
         assertThat(errorText.getText()).isEqualTo("password can't be blank");
     }
