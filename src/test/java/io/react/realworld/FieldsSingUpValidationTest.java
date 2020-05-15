@@ -1,49 +1,23 @@
 package io.react.realworld;
 
 import com.hillel.auto.page.object.RegistrationPage;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FieldsSingUpValidationTest {
-    public WebDriver driver;
+public class FieldsSingUpValidationTest extends TestBase {
+//    public WebDriver driver;
     String user = "TestUser"+new Random().nextInt(10000);
     String email = user+"@rambler.ru".toLowerCase();
     String password = "qwerty123";
 
-    @BeforeClass
-    public void setUpDriver() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
-        driver.get("https://react-redux.realworld.io");
-        WebElement signUpButton = driver.findElement(By.cssSelector("a[href = '#register']"));
-        signUpButton.click();
-
-    }
-
-    @AfterMethod
-    public void quot() {
-        driver.quit();
-    }
-
     @Test
     public void userNameBlankValidationTest () {
+        clickRegistrationButton();
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUser(" ");
         registrationPage.inputEmail(email);
@@ -56,6 +30,7 @@ public class FieldsSingUpValidationTest {
 
     @Test
     public void emailBlankValidationTest () {
+        clickRegistrationButton();
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUser(user);
         registrationPage.inputEmail(" ");
@@ -67,6 +42,7 @@ public class FieldsSingUpValidationTest {
     }
     @Test
     public void emailValidationTest () {
+        clickRegistrationButton();
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUser(user);
         registrationPage.inputEmail("wqweq@v");
@@ -79,6 +55,7 @@ public class FieldsSingUpValidationTest {
 
     @Test
     public void passwordShortValidationTest () {
+        clickRegistrationButton();
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUser(user);
         registrationPage.inputEmail(email);
@@ -90,6 +67,7 @@ public class FieldsSingUpValidationTest {
     }
     @Test
     public void passwordBlankValidationTest () {
+        clickRegistrationButton();
         RegistrationPage registrationPage = new RegistrationPage(driver);
         registrationPage.inputUser(user);
         registrationPage.inputEmail(email);

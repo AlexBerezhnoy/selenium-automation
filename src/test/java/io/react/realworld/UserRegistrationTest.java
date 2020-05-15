@@ -37,7 +37,7 @@ public class UserRegistrationTest extends TestBase {
     public void validationRegistrationForm() {
         clickRegistrationButton();
 
-       checkPage("Sign Up");
+        checkPage("Sign Up");
 
         clickSingInButton();
 
@@ -46,12 +46,6 @@ public class UserRegistrationTest extends TestBase {
         List<String> errors = errorMessage.stream().map(WebElement::getText).collect(Collectors.toList());
         assertThat(errorMessage).hasSize(3);
         assertThat(errors).contains("email can't be blank");
-    }
-
-
-        private void clickRegistrationButton() {
-        WebElement signUpButton = driver.findElement(By.cssSelector("a[href='#register']"));
-        signUpButton.click();
     }
 
     private WebElement userNameFiled() {

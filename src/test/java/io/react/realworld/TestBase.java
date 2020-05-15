@@ -76,4 +76,8 @@ public class TestBase {
         WebElement userButton = driver.findElement(By.cssSelector("[href='#@" +userName+"']"));
         userButton.click();
     }
+    protected void clickRegistrationButton() {
+        WebElement signUpButton = driver.findElement(By.cssSelector("a[href='#register']"));
+        signUpButton.click();
+    }
 }
