@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke test suite">
+
+    <listeners>
+        <listener class-name="com.hillel.auto.listener.TestMethodExecutionListener"/>
+    </listeners>
+
+    <test name="Login tests">
+        <classes>
+            <class name="io.react.realworld.FieldsSingInValidationTest"/>
+        </classes>
+    </test>
+
+</suite>
