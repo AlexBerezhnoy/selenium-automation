@@ -7,6 +7,9 @@
     </listeners>
 
     <test name="Login tests">
+<!--        <packages>-->
+<!--            <package name="io.react.realworld.*"/>-->
+<!--        </packages>-->
         <classes>
             <class name="io.react.realworld.FieldsSingInValidationTest"/>
         </classes>

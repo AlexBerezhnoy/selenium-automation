@@ -6,9 +6,14 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TestMethodExecutionListener implements ITestListener {
+
+    private Map<String, String> testResult = new HashMap<>();
 
     @Override
     public void onTestStart(ITestResult result) {
@@ -18,7 +23,9 @@ public class TestMethodExecutionListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
+        ITestNGMethod method = result.getMethod();
         long durationTime = result.getEndMillis() - result.getStartMillis();
+        testResult.put(method.getMethodName(), Long.toString(Duration.ofMillis(durationTime).toMillis()));
         System.out.println("Execution time: " + Duration.ofMillis(durationTime).getSeconds());
     }
 
@@ -44,6 +51,13 @@ public class TestMethodExecutionListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
+        System.out.println();
+        for (Map.Entry entry: testResult.entrySet()) {
 
+            System.out.println("Test Method "+entry.getKey()+" executed throughout " +  entry.getValue() + " milliseconds");
+
+        }
+        System.out.println();
     }
+
 }
