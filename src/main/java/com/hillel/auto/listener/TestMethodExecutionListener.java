@@ -6,7 +6,6 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,9 +52,7 @@ public class TestMethodExecutionListener implements ITestListener {
     public void onFinish(ITestContext context) {
         System.out.println();
         for (Map.Entry entry: testResult.entrySet()) {
-
             System.out.println("Test Method "+entry.getKey()+" executed throughout " +  entry.getValue() + " milliseconds");
-
         }
         System.out.println();
     }
