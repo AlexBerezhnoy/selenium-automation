@@ -1,8 +1,6 @@
 package io.react.realworld;
 
 import com.hillel.auto.page.object.LoginPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.Random;
@@ -23,8 +21,8 @@ public class FieldsSingInValidationTest extends TestBase{
         loginPage.inputPassword(password);
         loginPage.clickSingInButton();
 
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email or password is invalid");
+        String errorText = loginPage.getError();
+        assertThat(errorText).isEqualTo("email or password is invalid");
 
     }
     @Test
@@ -34,8 +32,8 @@ public class FieldsSingInValidationTest extends TestBase{
         loginPage.inputEmail(" "+email);
         loginPage.inputPassword(password);
         loginPage.clickSingInButton();
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email or password is invalid");
+        String errorText = loginPage.getError();
+        assertThat(errorText).isEqualTo("email or password is invalid");
 
     }
 
@@ -47,8 +45,8 @@ public class FieldsSingInValidationTest extends TestBase{
         loginPage.inputPassword(" "+password);
         loginPage.clickSingInButton();
 
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email or password is invalid");
+        String errorText = loginPage.getError();
+        assertThat(errorText).isEqualTo("email or password is invalid");
 
     }
     @Test
@@ -59,7 +57,7 @@ public class FieldsSingInValidationTest extends TestBase{
         loginPage.inputPassword(" ");
         loginPage.clickSingInButton();
 
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email or password is invalid");
+        String errorText = loginPage.getError();
+        assertThat(errorText).isEqualTo("email or password is invalid");
     }
 }

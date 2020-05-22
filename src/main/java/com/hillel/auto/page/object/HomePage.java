@@ -8,6 +8,8 @@ public class HomePage extends BasePage {
 
     private By profileBtn = By.xpath("//*[@class='user-pic']/..");
     private By newPostBtn = By.cssSelector("[href='#editor']");
+    private By yourFeedBtn = By.cssSelector(".feed-toggle li:nth-child(1) > a");
+    private By globalFeedBtn = By.cssSelector(".feed-toggle li:nth-child(2) > a");
 
     public HomePage (WebDriver driver) {
         super(driver);
@@ -26,5 +28,13 @@ public class HomePage extends BasePage {
     public ProfilePage clickProfile () {
         driver.findElement(profileBtn).click();
         return new ProfilePage(driver);
+    }
+
+    public WebElement yourFeedButton () {
+        return driver.findElement(yourFeedBtn);
+    }
+
+    public WebElement globalFeedButton () {
+        return driver.findElement(globalFeedBtn);
     }
 }

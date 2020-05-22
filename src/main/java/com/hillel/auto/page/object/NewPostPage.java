@@ -36,5 +36,10 @@ public class NewPostPage extends BasePage {
         return new ArticleDetailsPage(driver);
     }
 
+    public boolean newPostPageIsDisplayed()
+    {
+        return driver.findElement(By.cssSelector(".editor-page form")).isDisplayed();
+    }
+
 
 }

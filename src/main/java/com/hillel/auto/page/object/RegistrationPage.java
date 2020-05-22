@@ -40,5 +40,8 @@ public class RegistrationPage extends BasePage {
         signInButton.click();
     }
 
+    public String getError () {
+        return driver.findElement(By.cssSelector(".error-messages>li")).getText();
+    }
 
 }

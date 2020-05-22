@@ -2,6 +2,7 @@ package com.hillel.auto.page.object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class ArticleDetailsPage extends BasePage {
     private By editPostBtn = By.cssSelector(".article-meta>span>a");
@@ -28,5 +29,9 @@ public class ArticleDetailsPage extends BasePage {
     }
     public String getPostText () {
         return driver.findElement(postText).getText();
+    }
+
+    public WebElement getDatePost () {
+        return driver.findElement(By.cssSelector("#main > div > div > div.banner > div > div > div > span"));
     }
 }

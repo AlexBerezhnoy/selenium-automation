@@ -12,9 +12,14 @@ public class SettingPage extends BasePage {
     private By emailField = By.cssSelector(".form-group:nth-child(4)>input");
     private By newPasswordField = By.cssSelector(".form-group:nth-child(5)>input");
     private By updateSettingBtn = By.cssSelector("form button");
+    private By settingPage = By.cssSelector(".settings-page form");
 
     public SettingPage (WebDriver driver) {
         super(driver);
+    }
+
+    public boolean settingPageIsDisplayed () {
+        return driver.findElement(settingPage).isDisplayed();
     }
 
 }

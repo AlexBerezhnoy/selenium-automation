@@ -24,8 +24,8 @@ public class FieldsSingUpValidationTest extends TestBase {
         registrationPage.inputPassword(password);
         registrationPage.clickSingInButton();
 
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("username can't be blankis too short (minimum is 1 character)is too long (maximum is 20 characters)");
+        String errorText = registrationPage.getError();
+        assertThat(errorText).isEqualTo("username can't be blankis too short (minimum is 1 character)is too long (maximum is 20 characters)");
     }
 
     @Test
@@ -36,8 +36,8 @@ public class FieldsSingUpValidationTest extends TestBase {
         registrationPage.inputEmail(" ");
         registrationPage.inputPassword(password);
         registrationPage.clickSingInButton();
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email can't be blank");
+        String errorText = registrationPage.getError();
+        assertThat(errorText).isEqualTo("email can't be blank");
 
     }
     @Test
@@ -48,8 +48,8 @@ public class FieldsSingUpValidationTest extends TestBase {
         registrationPage.inputEmail("wqweq@v");
         registrationPage.inputPassword(password);
         registrationPage.clickSingInButton();
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("email is invalid");
+        String errorText = registrationPage.getError();
+        assertThat(errorText).isEqualTo("email is invalid");
 
     }
 
@@ -61,8 +61,8 @@ public class FieldsSingUpValidationTest extends TestBase {
         registrationPage.inputEmail(email);
         registrationPage.inputPassword("1");
         registrationPage.clickSingInButton();
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("password is too short (minimum is 8 characters)");
+        String errorText = registrationPage.getError();
+        assertThat(errorText).isEqualTo("password is too short (minimum is 8 characters)");
 
     }
     @Test
@@ -73,7 +73,7 @@ public class FieldsSingUpValidationTest extends TestBase {
         registrationPage.inputEmail(email);
         registrationPage.inputPassword(" ");
         registrationPage.clickSingInButton();
-        WebElement errorText = driver.findElement(By.cssSelector(".error-messages>li"));
-        assertThat(errorText.getText()).isEqualTo("password can't be blank");
+        String errorText = registrationPage.getError();
+        assertThat(errorText).isEqualTo("password can't be blank");
     }
 }

@@ -1,5 +1,6 @@
 package io.react.realworld;
 
+import com.hillel.auto.config.WebDriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +25,7 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+        driver = WebDriverFactory.createDriver();
         driver.manage().timeouts().implicitlyWait(4000, TimeUnit.MILLISECONDS);
         driver.get("https://react-redux.realworld.io/");
     }

@@ -3,8 +3,6 @@ package io.react.realworld;
 import com.hillel.auto.model.User;
 import com.hillel.auto.page.object.*;
 import com.hillel.auto.utils.UserData;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -23,7 +21,7 @@ public class NewPostTest extends TestBase {
     @Test(priority = 1 )
     public void createPost () {
         LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE MMM dd yyyy").withLocale(Locale.ENGLISH);;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE MMM dd yyyy").withLocale(Locale.ENGLISH);
         String nowDate = date.format(formatter);
         clickLoginButton();
         LoginPage loginPage = new LoginPage(driver);
@@ -35,7 +33,7 @@ public class NewPostTest extends TestBase {
         newPostPage.inputTags(tags);
         ArticleDetailsPage articleDetailsPage = newPostPage.clickPublishArticleBtn();
         assertThat(articleDetailsPage.getPostText()).isEqualTo(postText);
-        String datePost = getDatePost().getText();
+        String datePost = articleDetailsPage.getDatePost().getText();
         assertThat(datePost).isEqualTo(nowDate);
 
     }
@@ -58,7 +56,6 @@ public class NewPostTest extends TestBase {
         articleDetailsPage = newPostPage.clickPublishArticleBtn();
         assertThat(articleDetailsPage.getPostText()).isEqualTo(postText);
 
-
     }
 
     @Test (priority = 3 )
@@ -71,13 +68,6 @@ public class NewPostTest extends TestBase {
         ArticleDetailsPage articleDetailsPage = profilePage.clickLastPost();
         homePage = articleDetailsPage.clickDeleteButton();
         profilePage = homePage.clickProfile();
-
-        WebElement myArticlesPosts = driver.findElement(By.cssSelector(".article-preview"));
-        assertThat(myArticlesPosts.getText()).isEqualTo("No articles are here... yet.");
-
-    }
-
-    public WebElement getDatePost () {
-        return driver.findElement(By.cssSelector("#main > div > div > div.banner > div > div > div > span"));
+        assertThat(profilePage.getMyArticlePreview().getText()).isEqualTo("No articles are here... yet.");
     }
 }

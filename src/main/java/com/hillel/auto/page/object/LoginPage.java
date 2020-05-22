@@ -43,4 +43,8 @@ public class LoginPage extends BasePage {
         return new HomePage(driver);
     }
 
+    public String getError () {
+        return driver.findElement(By.cssSelector(".error-messages>li")).getText();
+    }
+
 }
