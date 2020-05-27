@@ -23,7 +23,7 @@ public class LoginTest extends TestBase{
          assertThat(loginPage.getPageTitle()).isEqualTo("Sign In");
 
          HomePage homePage = loginPage.login(user.getEmail(), user.getPassword());
-         assertThat(homePage.isUserLoggedIn(user.getUserName()));
+         assertThat(homePage.isUserLoggedIn(user.getUsername()));
        }
 
     }

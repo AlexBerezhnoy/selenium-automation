@@ -1,6 +1,6 @@
 package com.hillel.auto.model;
 
-public class ApiUser {
+public class UserResponse {
 
     private User user;
 

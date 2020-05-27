@@ -29,7 +29,7 @@ public class LoginTest {
                 .then()
                     .statusCode(200)
                     .body("user.email", equalTo(user.getEmail().toLowerCase()))
-                    .body("user.username", equalTo(user.getUserName()))
+                    .body("user.username", equalTo(user.getUsername()))
                     .body("user.token", notNullValue())
                 .log().all();
     }

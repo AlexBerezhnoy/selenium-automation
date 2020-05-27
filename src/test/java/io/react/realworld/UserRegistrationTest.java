@@ -23,13 +23,13 @@ public class UserRegistrationTest extends TestBase {
         assertThat(singForm().isDisplayed()).isTrue();
         User user = UserData.randomUser();
 
-        inputText(userNameFiled(), user.getUserName());
+        inputText(userNameFiled(), user.getUsername());
         inputText(emailField(), user.getEmail());
         inputText(passwordField(), user.getPassword());
 
         clickSingInButton();
 
-        userShouldBeLoggedIn(user.getUserName());
+        userShouldBeLoggedIn(user.getUsername());
 
     }
 
