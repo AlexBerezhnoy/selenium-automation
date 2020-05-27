@@ -27,5 +27,15 @@ public class ArticleService extends ApiService  {
                 .getArticle();
     }
 
+    public void deleteArticle(String slug) {
+        RestAssured
+                .given()
+                .header("Authorization", "Token " + token)
+                .when()
+                .delete("/articles/" + slug)
+                .then()
+                .statusCode(200);
+    }
+
 
 }

@@ -44,4 +44,5 @@ public class ProfilePage extends BasePage {
         waits.visibilityOfElementLocated(getMyArticle);
     return driver.findElement(getMyArticle);
     }
+
 }
